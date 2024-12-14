@@ -8,11 +8,11 @@ environment:
     - PYTHON_VERSION: "3.9"
 
 install:
-  # Installe Python et pip pour la version spécifiée
-  - cmd: choco install python --version %PYTHON_VERSION% -y
+  - cmd: powershell -Command "Invoke-WebRequest -Uri https://www.python.org/ftp/python/%PYTHON_VERSION%/python-%PYTHON_VERSION%-amd64.exe -OutFile python-installer.exe"
+  - cmd: start /wait python-installer.exe /quiet InstallAllUsers=1 PrependPath=1
   - cmd: refreshenv
   - cmd: python --version
-  - cmd: python -m pip install --upgrade pip setuptools wheel
+  - cmd: pip install --upgrade pip setuptools wheel
 
 build_script:
   - cmd: python setup.py bdist_wheel
