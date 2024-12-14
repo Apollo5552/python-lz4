@@ -8,7 +8,7 @@ environment:
     - PYTHON_VERSION: "3.9"
 
 install:
-  - cmd: powershell -Command "Invoke-WebRequest -Uri https://www.python.org/ftp/python/%PYTHON_VERSION%/python-%PYTHON_VERSION%-amd64.exe -OutFile python-installer.exe"
+  - cmd: powershell -Command "Invoke-WebRequest -Uri https://www.python.org/ftp/python/3.13.1/python-3.13.1-amd64.exe -OutFile python-installer.exe"
   - cmd: start /wait python-installer.exe /quiet InstallAllUsers=1 PrependPath=1
   - cmd: refreshenv
   - cmd: python --version
