@@ -1,0 +1,22 @@
+version: '{build}'
+image: Visual Studio 2022
+
+environment:
+  matrix:
+    - PYTHON_VERSION: "3.13"
+    - PYTHON_VERSION: "3.10"
+    - PYTHON_VERSION: "3.9"
+
+install:
+  # Installe Python et pip pour la version spécifiée
+  - cmd: choco install python --version %PYTHON_VERSION% -y
+  - cmd: refreshenv
+  - cmd: python --version
+  - cmd: python -m pip install --upgrade pip setuptools wheel
+
+build_script:
+  - cmd: python setup.py bdist_wheel
+
+artifacts:
+  - path: dist\*.whl
+    name: python-lz4-wheels
